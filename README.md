@@ -39,7 +39,7 @@ sudo dmesg | grep -i 'host mem'
 
 ```bash
 # Pi OS Bookworm and later: /boot/firmware/cmdline.txt   (older: /boot/cmdline.txt; and in case of our NTP server with custom kernel (i.e., https://github.com/by/RT-Kernel): /boot/firmware/NTP/cmdline.txt)
-sudo sed -i 's/$/ nvme.max_host_mem_size_mb=128/' /boot/firmware/cmdline.txt
+sudo sed -i 's/$/ nvme.max_host_mem_size_mb=64/' /boot/firmware/cmdline.txt
 sudo reboot
 ```
 
@@ -50,7 +50,7 @@ sudo dmesg | grep -i 'host mem'
 # expected: nvme nvme0: allocated 64 MiB host memory buffer (2 segments).
 ```
 
-`128` raises the ceiling; the drive uses only what it requests (64 MiB), so `=64` is equivalent. `cmdline.txt` is not overwritten by kernel or firmware updates.
+`64` raises the ceiling; the drive uses only what it requests (64 MiB), so `=64` is equivalent. `cmdline.txt` is not overwritten by kernel or firmware updates.
 
 ## Is it a fault of Pi or SSD?
 
